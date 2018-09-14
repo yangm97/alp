@@ -273,7 +273,7 @@ local ex = {
 	io.write("Exercício não encontrado.\n")
 end)
 
-local function run_ex(n)
+function u.run_ex(n)
 	io.write("Executando o exercício "..n.."\n")
 	local ok, res = pcall(ex[n])
 	if not ok then
@@ -281,15 +281,15 @@ local function run_ex(n)
 	end
 end
 
-local function menu(option)
+function u.menu(option)
 	local num = u.to_number(option)
 	if num then
-		run_ex(num)
+		u.run_ex(num)
 	end
 	local text = option:lower()
 	if text == "todos" then
 		for i in ipairs(ex) do
-			run_ex(i)
+			u.run_ex(i)
 			if not u.read_bool_reply("Você deseja continuar executando os exercícios?") then
 				break
 			end
@@ -300,6 +300,23 @@ local function menu(option)
 	end
 end
 
+function u.main(option)
+	while true do
+		if not option then
+			io.write([[Digite o número do exercício que você deseja executar.
+Você também pode digitar "todos" para executar todos em sequência.
+Digite "sair" para sair.
+]])
+			option = io.read()
+		end
+		local should_exit = u.menu(option)
+		if should_exit then
+			break
+		end
+		option = nil
+	end
+end
+
 if _G.TEST then
 	return {
 		u = u,
@@ -307,18 +324,4 @@ if _G.TEST then
 	}
 end
 
-local option = arg[1]
-while true do
-	if not option then
-		io.write([[Digite o número do exercício que você deseja executar.
-Você também pode digitar "todos" para executar todos em sequência.
-Digite "sair" para sair.
-]])
-		option = io.read()
-	end
-	local should_exit = menu(option)
-	if should_exit then
-		break
-	end
-	option = nil
-end
+u.main(arg[1])
