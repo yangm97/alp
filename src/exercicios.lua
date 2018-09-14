@@ -12,26 +12,26 @@ end
 
 function u.insert_msg(i)
 	if i == 1 then
-		print("Insira o primeiro número")
+		io.write("Insira o primeiro número\n")
 		return
 	end
-	print("Insira o próximo número")
+	io.write("Insira o próximo número\n")
 end
 
 function u.result_msg(operation, result, err)
 	operation = operation or "cálculo"
 	err = err or ""
 	if not result then
-		print("Não foi possível realizar a operação ("..operation.."). "..err)
+		io.write("Não foi possível realizar a operação ("..operation.."). "..err.."\n")
 		return false
 	end
-	print("O resultado da operação ("..operation..") é: "..result)
+	io.write("O resultado da operação ("..operation..") é: "..result.."\n")
 	return true
 end
 
 function u.read_bool_reply(msg)
 	if msg then
-		print(msg)
+		io.write(msg.."\n")
 	end
 	local input = io.read():lower()
 	local reply = {
@@ -56,7 +56,7 @@ end
 
 function u.read_num(msg)
 	if msg then
-		print(msg)
+		io.write(msg.."\n")
 	end
 	local num = u.to_number(io.read())
 	if not num then
@@ -67,7 +67,7 @@ end
 
 function u.read_multiple_num(n)
 	if not n then
-		print("Insira um valor não numérico a qualquer momento para realizar o cálculo.")
+		io.write("Insira um valor não numérico a qualquer momento para realizar o cálculo.\n")
 	end
 	-- local i = 1 -- Lua indexes/arrays start at 1
 	local values = {}
@@ -149,7 +149,7 @@ local ex = {
 		local n = u.read_num("Insira a quantidade de números que você deja somar:")
 		local result = assert(u.sum_n(n))
 		u.result_msg("soma", result)
-		print("Você pediu para somar "..n.." números.")
+		io.write("Você pediu para somar "..n.." números.\n")
 	end,
 	[3] = function()
 		local values, i = u.read_multiple_num()
@@ -161,20 +161,20 @@ local ex = {
 		local continue
 		repeat
 			for i=1,100 do
-				print(i)
+				io.write(i.."\n")
 			end
 			continue = u.read_bool_reply("Deseja ver os números de 1 a 100 novamente?")
 		until not continue
 	end,
 	[5] = function()
 		for i=500,100,-5 do
-			print(i)
+			io.write(i.."\n")
 		end
 	end,
 	[6] = function()
 		local f = assert(u.read_num("Insira a temperatura em Farenheit"))
 		local c = 5/9 * (f - 32)
-		print("A temperatura em Celsius é: "..c.."º")
+		io.write("A temperatura em Celsius é: "..c.."º\n")
 	end,
 	[7] = function()
 		local RISE = u.percent_to_decimal(12)
@@ -187,15 +187,15 @@ local ex = {
 		local total_salaries = sum(salaries)
 		local total_rise = sum(rises)
 		local total = total_rise + total_salaries
-		print("Total dos aumentos: R$"..total_rise)
-		print("Total a ser pago com os aumentos: R$"..total)
+		io.write("Total dos aumentos: R$"..total_rise.."\n")
+		io.write("Total a ser pago com os aumentos: R$"..total.."\n")
 	end,
 	[8] = function()
 		local PROFIT = u.percent_to_decimal(8)
 		local materials = assert(u.read_num("Insira o valor (em R$) dos materiais:"))
 		local worked_hours = assert(u.read_num("Insira o valor (em R$) das horas trabalhadas:"))
 		local price = sum{materials, worked_hours} * (1+PROFIT)
-		print("O preço é: R$"..price)
+		io.write("O preço é: R$"..price)
 	end,
 	[9] = function()
 		local v = u.read_multiple_num(2)
@@ -212,7 +212,7 @@ local ex = {
 		local cost = assert(u.read_num("Insira o custo de fabricação:"))
 		local price = cost * (1+ICMS)
 		local msg = "O preço com ICMS é: "
-		print(msg..price)
+		io.write(msg..price.."\n")
 	end,
 	[11] = function()
 		local WORK_HOUR = {
@@ -222,12 +222,12 @@ local ex = {
 		local builder_hours = assert(u.read_num("Insira a quantidade de horas que o pedreiro trabalhou:"))
 		local painter_hours = assert(u.read_num("Insira a quantidade de horas que o pintor trabalhou:"))
 		local cost = (builder_hours * WORK_HOUR.builder) + (painter_hours * WORK_HOUR.painter)
-		print("O custo total da mão de obra é: R$"..cost)
+		io.write("O custo total da mão de obra é: R$"..cost.."\n")
 	end,
 	[12] = function()
 		local years = assert(u.read_num("Insira a quantidade de anos:"))
 		local days = years*YEAR_DAYS
-		print("A quantidade de dias é: "..days)
+		io.write("A quantidade de dias é: "..days.."\n")
 	end,
 	[13] = function()
 		local years = u.read_multiple_num(2)
@@ -237,7 +237,7 @@ local ex = {
 		if diff_days < 0 then
 			diff_days = diff_days * -1
 		end
-		print("A quantidade de dias existentes entre "..years[1].." e "..years[2].." é "..diff_days)
+		io.write("A quantidade de dias existentes entre "..years[1].." e "..years[2].." é "..diff_days.."\n")
 	end,
 	[14] = function()
 		local GRADE = {
@@ -256,7 +256,7 @@ local ex = {
 		local weighted_grades = {}
 		for k,v in pairs(GRADE) do
 			table.insert(weights, v.weight)
-			print('Insira as notas do método de avaliação "'..k..'"')
+			io.write('Insira as notas do método de avaliação "'..k..'"\n')
 			v.grades = u.read_multiple_num(v.n)
 			local average = 0
 			for i = 1, v.n do
@@ -267,17 +267,17 @@ local ex = {
 			table.insert(weighted_grades, average)
 		end
 		local weighted_average = sum(weighted_grades)/sum(weights)
-		print("A média final é: "..weighted_average)
+		io.write("A média final é: "..weighted_average.."\n")
 	end,
 } set_default(ex, function()
-	print("Exercício não encontrado.")
+	io.write("Exercício não encontrado.\n")
 end)
 
 local function run_ex(n)
-	print("Executando o exercício "..n)
+	io.write("Executando o exercício "..n.."\n")
 	local ok, res = pcall(ex[n])
 	if not ok then
-		print(res)
+		io.write(res)
 	end
 end
 
@@ -310,9 +310,10 @@ end
 local option = arg[1]
 while true do
 	if not option then
-		print([[Digite o número do exercício que você deseja executar.
+		io.write([[Digite o número do exercício que você deseja executar.
 Você também pode digitar "todos" para executar todos em sequência.
-Digite "sair" para sair.]])
+Digite "sair" para sair.
+]])
 		option = io.read()
 	end
 	local should_exit = menu(option)
