@@ -50,7 +50,8 @@ function u.read_bool_reply(msg)
    return reply[input]
 end
 
-function u.to_number(v)
+function u.to_number(v) -- TODO: support decimals
+   if type(v) ~= "string" then return false end
    return tonumber(v:match("%d+"))
 end
 

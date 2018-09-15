@@ -29,6 +29,28 @@ local function test_return_from_input(f, fake_input, ...)
    return f(...)
 end
 
+describe("Utility", function()
+   describe("to_number", function()
+      it("should extract numeric values from strings", function()
+         local str = {
+            [28] = "28 ºC",
+            [100] = "100%",
+            [99] = "abc 99 ",
+            -- [50.12] = "R$ 50.12",
+         }
+         for k,v in pairs(str) do
+            assert.equals(k, u.to_number(v))
+         end
+      end)
+      it("should return falsy when no input is given", function()
+         assert.falsy(u.to_number())
+      end)
+      it("should return falsy when input has no number to extract", function()
+         assert.falsy(u.to_number("abc"))
+      end)
+   end)
+end)
+
 describe("User interaction", function()
    describe("display message", function()
       describe("number input", function()
