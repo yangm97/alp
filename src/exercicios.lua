@@ -35,17 +35,16 @@ function u.read_bool_reply(msg)
    end
    local input = io.read():lower()
    local reply = {
-      s = true,
-      sim = true,
-      y = true,
-      yes = true,
-      si = true,
+      ["s"] = true,
+      ["sim"] = true,
+      ["y"] = true,
+      ["yes"] = true,
+      ["si"] = true,
       ["sí"] = true,
       ["true"] = true,
-      [true] = true,
-      [1] = true,
-      v = true,
-      t = true,
+      ["1"] = true,
+      ["v"] = true,
+      ["t"] = true,
    } set_default(reply, false)
    return reply[input]
 end
