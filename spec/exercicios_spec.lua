@@ -71,6 +71,7 @@ describe("User interaction", function()
                "1",
                "v",
                "t",
+               "OK",
             }
             for i=1, #input do
                local fake_input = new_fake_input(input[i])

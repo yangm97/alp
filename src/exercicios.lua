@@ -45,6 +45,7 @@ function u.read_bool_reply(msg)
       ["1"] = true,
       ["v"] = true,
       ["t"] = true,
+      ["ok"] = true,
    } set_default(reply, false)
    return reply[input]
 end
