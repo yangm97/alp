@@ -105,6 +105,12 @@ describe("User interaction", function()
       end)
 
       describe("number", function()
+         it("should display a friendly message, when set", function()
+            local msg = "Insira um número:"
+            local fake_input = new_fake_input("1")
+            local result = test_whole_output(u.read_num, fake_input, msg)
+            assert.equals(msg.."\n", result)
+         end)
          it("should return given numeric values", function()
             local fake_input = new_fake_input("42")
             local result = test_return_from_input(u.read_num, fake_input)
