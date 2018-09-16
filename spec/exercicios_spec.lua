@@ -122,5 +122,39 @@ describe("User interaction", function()
             assert.falsy(result)
          end)
       end)
+
+      describe("multiple number", function()
+         local input = {
+            "1\n",
+            "32\n",
+            "9\n",
+            "47\n",
+            "14\n",
+            "a\n",
+         }
+         it("should read indefinitely, when n is unknown", function()
+            local fake_input = new_fake_input(unpack(input))
+            local result, n = test_return_from_input(u.read_multiple_num, fake_input)
+            local expected = {
+               1,
+               32,
+               9,
+               47,
+               14,
+            }
+            assert.are.same(expected, result)
+            assert.equals(#expected, n)
+         end)
+         it("should read n numbers", function()
+            local fake_input = new_fake_input(unpack(input))
+            local expected = {
+               1,
+               32,
+            }
+            local result, n = test_return_from_input(u.read_multiple_num, fake_input, #expected)
+            assert.are.same(expected, result)
+            assert.equals(#expected, n)
+         end)
+      end)
    end)
 end)
