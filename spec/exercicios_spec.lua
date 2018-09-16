@@ -1,4 +1,5 @@
 _G.TEST = true
+local unpack = unpack or table.unpack -- luacheck: ignore 143
 local exercicios = require "exercicios"
 local u = exercicios.u
 -- local ex = exercicios.ex
