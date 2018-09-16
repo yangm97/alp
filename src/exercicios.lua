@@ -99,7 +99,7 @@ function u.read_multiple_num(n)
       end
    until not input
 
-   return values, i-1
+   return values, #values
 end
 
 function u.sum_(t, ans, i)
