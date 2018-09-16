@@ -8,6 +8,10 @@ env:
   - LUA="lua=5.3"
   - LUA="luajit 2.0"
 
+cache:
+  directories:
+    - lua_install
+
 before_install:
   - pip install hererocks
   - hererocks lua_install -r^ --$LUA
