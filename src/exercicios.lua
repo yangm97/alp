@@ -113,7 +113,7 @@ function u.sum_(t, ans, i)
    return u.sum_(t, ans+v, i-1)
 end
 
-local function sum(t)
+function u.sum(t)
    return u.sum_(t, 0, #t)
 end
 
@@ -130,7 +130,7 @@ function u.sum_n(n)
       end
       t[i] = ok
    end
-   return sum(t)
+   return u.sum(t)
 end
 
 function u.percent_to_decimal(percent)
@@ -154,7 +154,7 @@ local ex = {
    end,
    [3] = function()
       local values, i = u.read_multiple_num()
-      local result = assert(sum(values))
+      local result = assert(u.sum(values))
       u.result_msg("soma", result)
       u.result_msg("média", result/i)
    end,
@@ -185,8 +185,8 @@ local ex = {
       for i in ipairs(salaries) do
          rises[i] = salaries[i] * RISE
       end
-      local total_salaries = sum(salaries)
-      local total_rise = sum(rises)
+      local total_salaries = u.sum(salaries)
+      local total_rise = u.sum(rises)
       local total = total_rise + total_salaries
       io.write("Total dos aumentos: R$"..total_rise.."\n")
       io.write("Total a ser pago com os aumentos: R$"..total.."\n")
@@ -195,12 +195,12 @@ local ex = {
       local PROFIT = u.percent_to_decimal(8)
       local materials = assert(u.read_num("Insira o valor (em R$) dos materiais:"))
       local worked_hours = assert(u.read_num("Insira o valor (em R$) das horas trabalhadas:"))
-      local price = sum{materials, worked_hours} * (1+PROFIT)
+      local price = u.sum{materials, worked_hours} * (1+PROFIT)
       io.write("O preço é: R$"..price)
    end,
    [9] = function()
       local v = u.read_multiple_num(2)
-      local result = assert(sum(v))
+      local result = assert(u.sum(v))
       u.result_msg("soma", result)
       if not result then
          return
@@ -267,7 +267,7 @@ local ex = {
          average = average/v.n
          table.insert(weighted_grades, average)
       end
-      local weighted_average = sum(weighted_grades)/sum(weights)
+      local weighted_average = u.sum(weighted_grades)/u.sum(weights)
       io.write("A média final é: "..weighted_average.."\n")
    end,
 } set_default(ex, function()
