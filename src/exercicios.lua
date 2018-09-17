@@ -113,6 +113,9 @@ function u.sum_(t, ans, i)
 end
 
 function u.sum(t)
+	if #t < 2 then
+		return false, "É necessário no mínimo dois valores numéricos para se realizar uma soma."
+	end
    return u.sum_(t, 0, #t)
 end
 

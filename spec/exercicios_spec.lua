@@ -50,6 +50,28 @@ describe("Utility", function()
          assert.falsy(u.to_number("abc"))
       end)
    end)
+   describe("sum", function()
+      it("should fail when not enough elements are given", function()
+         local t = {1}
+         local ok, err = u.sum(t)
+         assert.is_false(ok)
+         assert.equals("É necessário no mínimo dois valores numéricos para se realizar uma soma.", err)
+      end)
+      it("should fail when one of the elements is not a number", function()
+         local t = {32, "a", 11}
+         local ok, err = u.sum(t)
+         assert.is_false(ok)
+         assert.equals("Não é possível somar com valores não numéricos.", err)
+      end)
+      it("should sum two elements", function()
+         local t = {22, 11}
+         assert.equals(33, u.sum(t))
+      end)
+      it("should sum multiple elements", function()
+         local t = {22, 11, 41, 107, 6}
+         assert.equals(187, u.sum(t))
+      end)
+   end)
 end)
 
 describe("User interaction", function()
