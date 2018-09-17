@@ -106,11 +106,10 @@ function u.sum_(t, ans, i)
    if i == 0 then
       return ans
    end
-   local v = tonumber(t[i])
-   if not v then
+   if type(t[i]) ~= "number" then
       return false, "Não é possível somar com valores não numéricos."
    end
-   return u.sum_(t, ans+v, i-1)
+   return u.sum_(t, ans+t[i], i-1)
 end
 
 function u.sum(t)
