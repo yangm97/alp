@@ -342,4 +342,71 @@ describe("Exercise", function()
          assert.truthy((result):find("0.82608695652174"))
       end)
    end)
+
+   describe("10", function()
+      it("should print price + ICMS tax", function()
+         local input = {
+            "R$100",
+         }
+         local result = test_output_from_t(ex[10], input)
+         assert.truthy((result):find("R$115"))
+      end)
+   end)
+
+   describe("11", function()
+      it("should print building cost", function()
+         local input = {
+            "42h",
+            "11h",
+         }
+         local result = test_output_from_t(ex[11], input)
+         assert.truthy((result):find("R$508"))
+      end)
+   end)
+
+   describe("12", function()
+      it("should convert years to days", function()
+         local input = {
+            "42 anos",
+         }
+         local result = test_output_from_t(ex[12], input)
+         assert.truthy((result):find("15330"))
+      end)
+   end)
+
+   describe("13", function()
+      it("should print the difference between two years in days", function()
+         local input = {
+            "2018",
+            "0",
+         }
+         local result = test_output_from_t(ex[13], input)
+         assert.truthy((result):find("736570"))
+      end)
+      it("should not display difference as a negative value", function()
+         local input = {
+            "0",
+            "2018",
+         }
+         local result = test_output_from_t(ex[13], input)
+         assert.falsy((result):find("-736570"))
+         assert.truthy((result):find("736570"))
+      end)
+   end)
+
+   describe("14", function()
+      it("should print weighted grades from user input", function()
+         local input = {
+            "0",
+            "0",
+            "10",
+            "10",
+            "10",
+            "10",
+         }
+         local result = test_output_from_t(ex[14], input)
+         print(result)
+         assert.truthy((result):find("7.8"))
+      end)
+   end)
 end)
