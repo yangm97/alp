@@ -174,8 +174,8 @@ local ex = {
       for i in ipairs(salaries) do
          rises[i] = salaries[i] * RISE
       end
-      local total_salaries = u.sum(salaries)
-      local total_rise = u.sum(rises)
+      local total_salaries = u.sum_(salaries, 0, #salaries)
+      local total_rise = u.sum_(rises, 0, #rises)
       local total = total_rise + total_salaries
       io.write("Total dos aumentos: R$"..total_rise.."\n")
       io.write("Total a ser pago com os aumentos: R$"..total.."\n")
