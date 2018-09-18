@@ -102,6 +102,16 @@ function u.read_multiple_num(n)
    return values, #values
 end
 
+function u.check_sum_n(n)
+   if type(n) ~= "number" then
+      return false, "A quantidade de números a ser somada deve ser um valor numérico."
+   end
+   if n < 2 then
+      return false, "É necessário no mínimo dois valores numéricos para se realizar uma soma."
+   end
+   return true
+end
+
 function u.sum_(t, ans, i)
    if i == 0 then
       return ans
@@ -113,15 +123,19 @@ function u.sum_(t, ans, i)
 end
 
 function u.sum(t)
-	if #t < 2 then
-		return false, "É necessário no mínimo dois valores numéricos para se realizar uma soma."
-	end
+   local ok, err = u.check_sum_n(#t)
+   if not ok then
+      return false, err
+   end
    return u.sum_(t, 0, #t)
 end
 
 function u.sum_n(n)
-   if not n then
-      return false, "A quantidade de números a ser somada deve ser um valor numérico."
+   do
+      local ok, err = u.check_sum_n(n)
+      if not ok then
+         return false, err
+      end
    end
    local t = {}
    for i = 1, n do
