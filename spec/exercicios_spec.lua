@@ -30,13 +30,13 @@ local function test_return_from_input(f, fake_input, ...)
    return f(...)
 end
 
-local function test_output_from_t(f, t)
+local function test_output_from_t(f, t, ...)
    local input = {}
    for i=1,#t do
       input[i] = t[i].."\n"
    end
    local fake_input = new_fake_input(unpack(input))
-   return test_whole_output(f, fake_input)
+   return test_whole_output(f, fake_input, ...)
 end
 
 describe("Utility", function()
@@ -407,5 +407,43 @@ describe("Exercise", function()
          local result = test_output_from_t(ex[14], input)
          assert.truthy((result):find("7.8"))
       end)
+   end)
+end)
+
+describe("Menu", function()
+   it("should be able to exit", function()
+      local input = {
+         "sair",
+      }
+      local result = test_output_from_t(u.main, input)
+      assert.equals([[Digite o número do exercício que você deseja executar.
+Você também pode digitar "todos" para executar todos em sequência.
+Digite "sair" para sair.
+]], result)
+   end)
+   it("should be able to run the given exercise", function()
+      local input = {
+         "1",
+         "1",
+         "1",
+         "n",
+         "sair",
+      }
+      local result = test_output_from_t(u.main, input)
+      assert.truthy((result):find("2"))
+      assert.truthy((result):find("Deseja executar o exercício 1 novamente?"))
+      assert.truthy((result):find("Digite \"sair\" para sair."))
+   end)
+   it("should be able to, when given, jump into exercises", function()
+      local input = {
+         "1",
+         "2",
+         "n",
+         "sair",
+      }
+      local result = test_output_from_t(u.main, input, "1")
+      assert.truthy((result):find("3"))
+      assert.truthy((result):find("Deseja executar o exercício 1 novamente?"))
+      assert.truthy((result):find("Digite \"sair\" para sair."))
    end)
 end)
