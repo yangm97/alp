@@ -130,25 +130,6 @@ function u.sum(t)
    return u.sum_(t, 0, #t)
 end
 
-function u.sum_n(n)
-   do
-      local ok, err = u.check_sum_n(n)
-      if not ok then
-         return false, err
-      end
-   end
-   local t = {}
-   for i = 1, n do
-      u.insert_msg(i)
-      local ok, err = u.read_num()
-      if not ok then
-         return false, err
-      end
-      t[i] = ok
-   end
-   return u.sum(t)
-end
-
 function u.percent_to_decimal(percent)
    return percent/100
 end
@@ -157,14 +138,14 @@ local ex = {
    [1] = function()
       local continue
       repeat
-         local result, err = u.sum_n(2)
+         local result, err = u.sum(u.read_multiple_num(2))
          u.result_msg("soma", result, err)
          continue = u.read_bool_reply("Deseja somar novamente?")
       until not continue
    end,
    [2] = function()
       local n = u.read_num("Insira a quantidade de números que você deja somar:")
-      local result = assert(u.sum_n(n))
+      local result = assert(u.sum(u.read_multiple_num(n)))
       u.result_msg("soma", result)
       io.write("Você pediu para somar "..n.." números.\n")
    end,
