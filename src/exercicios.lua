@@ -198,7 +198,7 @@ local ex = {
       local ICMS = u.percent_to_decimal(15)
       local cost = assert(u.read_num("Insira o custo de fabricação:"))
       local price = cost * (1+ICMS)
-      local msg = "O preço com ICMS é: "
+      local msg = "O preço com ICMS é: R$"
       io.write(msg..price.."\n")
    end,
    [11] = function()
