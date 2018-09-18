@@ -232,7 +232,7 @@ describe("Exercise", function()
    end)
 
    describe("2", function()
-      it("should sum n values from user input", function()
+      it("should sum n values from user input and show n", function()
          local input = {
             19,
             18,
@@ -246,7 +246,7 @@ describe("Exercise", function()
    end)
 
    describe("3", function()
-      it("should sum n values from user input", function()
+      it("should sum n values from user input and show the average", function()
          local input = {
             19,
             18,
