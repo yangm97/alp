@@ -240,20 +240,17 @@ local ex = {
          },
       }
       local weights = {}
-      local weighted_grades = {}
+      local grades = {}
       for k,v in pairs(GRADE) do
-         table.insert(weights, v.weight)
+         table.insert(weights, v.weight*v.n)
          io.write('Insira as notas do método de avaliação "'..k..'"\n')
          v.grades = u.read_multiple_num(v.n)
-         local average = 0
          for i = 1, v.n do
             local weighted_grade = v.grades[i] * v.weight
-            average = average + weighted_grade
+            table.insert(grades, weighted_grade)
          end
-         average = average/v.n
-         table.insert(weighted_grades, average)
       end
-      local weighted_average = u.sum(weighted_grades)/u.sum(weights)
+      local weighted_average = u.sum(grades)/u.sum(weights)
       io.write("A média final é: "..weighted_average.."\n")
    end,
 } set_default(ex, function()
