@@ -271,7 +271,7 @@ function u.run_ex(n)
       if not ok then
          io.write(res)
       end
-      continue = u.read_bool_reply("Deseja executar o exercício "..n.." novamente?")
+      continue = u.read_bool_reply("\nDeseja executar o exercício "..n.." novamente?")
    until not continue
 end
 
