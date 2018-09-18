@@ -140,8 +140,8 @@ local ex = {
       u.result_msg("soma", result, err)
    end,
    [2] = function()
-      local n = u.read_num("Insira a quantidade de números que você deja somar:")
-      local result = assert(u.sum(u.read_multiple_num(n)))
+      local t, n = u.read_multiple_num()
+      local result = assert(u.sum(t))
       u.result_msg("soma", result)
       io.write("Você pediu para somar "..n.." números.\n")
    end,
