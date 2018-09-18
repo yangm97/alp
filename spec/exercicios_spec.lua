@@ -318,4 +318,28 @@ describe("Exercise", function()
          assert.truthy((result):find("R$6720"))
       end)
    end)
+
+   describe("8", function()
+      it("should calculate prices", function()
+         local input = {
+            "R$550",
+            "R$950",
+         }
+         local result = test_output_from_t(ex[8], input)
+         assert.truthy((result):find("R$1620"))
+      end)
+   end)
+
+   describe("9", function()
+      it("should sum, multiply and divide two values from user input", function()
+         local input = {
+            19,
+            23,
+         }
+         local result = test_output_from_t(ex[9], input)
+         assert.truthy((result):find("42"))
+         assert.truthy((result):find("437"))
+         assert.truthy((result):find("0.82608695652174"))
+      end)
+   end)
 end)
