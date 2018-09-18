@@ -86,6 +86,12 @@ describe("Utility", function()
          assert.equals(187, u.sum(t))
       end)
    end)
+
+   describe("percent_to_decimal", function()
+      it("should convert numeric percentage into decimal representations", function()
+         assert.equals(0.49, u.percent_to_decimal(49))
+      end)
+   end)
 end)
 
 describe("User interaction", function()
