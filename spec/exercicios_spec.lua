@@ -2,7 +2,7 @@ _G.TEST = true
 local unpack = unpack or table.unpack -- luacheck: ignore 143
 local exercicios = require "exercicios"
 local u = exercicios.u
--- local ex = exercicios.ex
+local ex = exercicios.ex
 
 local function test_whole_output(f, fake_input, ...)
    if fake_input then
@@ -28,6 +28,15 @@ end
 local function test_return_from_input(f, fake_input, ...)
    io.input(fake_input)
    return f(...)
+end
+
+local function test_output_from_t(f, t)
+   local input = {}
+   for i=1,#t do
+      input[i] = t[i].."\n"
+   end
+   local fake_input = new_fake_input(unpack(input))
+   return test_whole_output(f, fake_input)
 end
 
 describe("Utility", function()
@@ -198,6 +207,27 @@ describe("User interaction", function()
             assert.are.same(expected, result)
             assert.equals(#expected, n)
          end)
+      end)
+   end)
+end)
+
+describe("Exercise", function()
+   describe("1", function()
+      it("should sum two values from user input", function()
+         local input = {
+            19,
+            23,
+         }
+         local result = test_output_from_t(ex[1], input)
+         assert.truthy((result):find("42"))
+      end)
+      it("should handle invalid input", function()
+         local input = {
+            "a",
+            23,
+         }
+         local result = test_output_from_t(ex[1], input)
+         assert.truthy((result):find("Não foi possível"))
       end)
    end)
 end)
