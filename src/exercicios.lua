@@ -136,12 +136,8 @@ end
 
 local ex = {
    [1] = function()
-      local continue
-      repeat
-         local result, err = u.sum(u.read_multiple_num(2))
-         u.result_msg("soma", result, err)
-         continue = u.read_bool_reply("Deseja somar novamente?")
-      until not continue
+      local result, err = u.sum(u.read_multiple_num(2))
+      u.result_msg("soma", result, err)
    end,
    [2] = function()
       local n = u.read_num("Insira a quantidade de números que você deja somar:")
@@ -156,13 +152,9 @@ local ex = {
       u.result_msg("média", result/i)
    end,
    [4] = function()
-      local continue
-      repeat
-         for i=1,100 do
-            io.write(i.."\n")
-         end
-         continue = u.read_bool_reply("Deseja ver os números de 1 a 100 novamente?")
-      until not continue
+      for i=1,100 do
+         io.write(i.."\n")
+      end
    end,
    [5] = function()
       for i=500,100,-5 do
@@ -273,10 +265,14 @@ end)
 
 function u.run_ex(n)
    io.write("Executando o exercício "..n.."\n")
-   local ok, res = pcall(ex[n])
-   if not ok then
-      io.write(res)
-   end
+   local continue
+   repeat
+      local ok, res = pcall(ex[n])
+      if not ok then
+         io.write(res)
+      end
+      continue = u.read_bool_reply("Deseja executar o exercício "..n.." novamente?")
+   until not continue
 end
 
 function u.menu(option)
