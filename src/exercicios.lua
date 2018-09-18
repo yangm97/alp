@@ -51,7 +51,9 @@ function u.read_bool_reply(msg)
 end
 
 function u.to_number(v) -- TODO: support decimals
-   if type(v) ~= "string" then return false end
+   local type_v = type(v)
+   if type_v == "number" then return v end
+   if type_v ~= "string" then return false end
    return tonumber(v:match("%d+"))
 end
 
@@ -275,6 +277,7 @@ function u.menu(option)
    local num = u.to_number(option)
    if num then
       u.run_ex(num)
+      return
    end
    local text = option:lower()
    if text == "todos" then
@@ -284,6 +287,7 @@ function u.menu(option)
             break
          end
       end
+      return
    end
    if text == "sair" then
       return true
@@ -291,7 +295,8 @@ function u.menu(option)
 end
 
 function u.main(option)
-   while true do
+   local should_exit
+   repeat
       if not option then
          io.write([[Digite o número do exercício que você deseja executar.
 Você também pode digitar "todos" para executar todos em sequência.
@@ -299,12 +304,9 @@ Digite "sair" para sair.
 ]])
          option = io.read()
       end
-      local should_exit = u.menu(option)
-      if should_exit then
-         break
-      end
+      should_exit = u.menu(option)
       option = nil
-   end
+   until should_exit
 end
 
 if _G.TEST then
