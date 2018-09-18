@@ -230,4 +230,32 @@ describe("Exercise", function()
          assert.truthy((result):find("Não foi possível"))
       end)
    end)
+
+   describe("2", function()
+      it("should sum n values from user input", function()
+         local input = {
+            19,
+            18,
+            5,
+            "",
+         }
+         local result = test_output_from_t(ex[2], input)
+         assert.truthy((result):find("42"))
+         assert.truthy((result):find("3"))
+      end)
+   end)
+
+   describe("3", function()
+      it("should sum n values from user input", function()
+         local input = {
+            19,
+            18,
+            5,
+            "",
+         }
+         local result = test_output_from_t(ex[3], input)
+         assert.truthy((result):find("42"))
+         assert.truthy((result):find("14"))
+      end)
+   end)
 end)
