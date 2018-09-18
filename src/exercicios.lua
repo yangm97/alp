@@ -228,12 +228,14 @@ local ex = {
    end,
    [14] = function()
       local GRADE = {
-         prova = {
+         {
+            name = "Prova",
             n = 4,
             weight = 65,
             grades = {},
          },
-         trabalho = {
+         {
+            name = "Trabalho",
             n = 2,
             weight = 35,
             grades = {},
@@ -241,12 +243,12 @@ local ex = {
       }
       local weights = {}
       local grades = {}
-      for k,v in pairs(GRADE) do
-         table.insert(weights, v.weight*v.n)
-         io.write('Insira as notas do método de avaliação "'..k..'"\n')
-         v.grades = u.read_multiple_num(v.n)
-         for i = 1, v.n do
-            local weighted_grade = v.grades[i] * v.weight
+      for i=1,#GRADE do
+         table.insert(weights, GRADE[i].weight*GRADE[i].n)
+         io.write('Insira as notas do método de avaliação "'..GRADE[i].name..'"\n')
+         GRADE[i].grades = u.read_multiple_num(GRADE[i].n)
+         for j = 1, GRADE[i].n do
+            local weighted_grade = GRADE[i].grades[j] * GRADE[i].weight
             table.insert(grades, weighted_grade)
          end
       end

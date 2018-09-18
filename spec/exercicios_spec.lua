@@ -397,15 +397,14 @@ describe("Exercise", function()
    describe("14", function()
       it("should print weighted grades from user input", function()
          local input = {
+            "10",
+            "10",
+            "10",
+            "10",
             "0",
             "0",
-            "10",
-            "10",
-            "10",
-            "10",
          }
          local result = test_output_from_t(ex[14], input)
-         print(result)
          assert.truthy((result):find("7.8"))
       end)
    end)
