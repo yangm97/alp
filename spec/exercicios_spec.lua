@@ -258,4 +258,26 @@ describe("Exercise", function()
          assert.truthy((result):find("14"))
       end)
    end)
+
+   describe("4", function()
+      it("should print values from 1-100", function()
+         local expected = ""
+         for i=1,100 do
+            expected = expected..i.."\n"
+         end
+         local result = test_whole_output(ex[4])
+         assert.equals(expected, result)
+      end)
+   end)
+
+   describe("5", function()
+      it("should print values from 500 to 100 in 5 steps", function()
+         local expected = ""
+         for i=500,100,-5 do
+            expected = expected..i.."\n"
+         end
+         local result = test_whole_output(ex[5])
+         assert.equals(expected, result)
+      end)
+   end)
 end)
