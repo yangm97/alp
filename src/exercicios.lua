@@ -104,7 +104,7 @@ end
 
 function u.check_sum_n(n)
    if type(n) ~= "number" then
-      return false, "A quantidade de números a ser somada deve ser um valor numérico."
+      return false, "A quantidade de números a serem somadados deve ser um valor numérico."
    end
    if n < 2 then
       return false, "É necessário no mínimo dois valores numéricos para se realizar uma soma."
