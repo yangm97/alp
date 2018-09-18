@@ -191,9 +191,6 @@ local ex = {
       local v = u.read_multiple_num(2)
       local result = assert(u.sum(v))
       u.result_msg("soma", result)
-      if not result then
-         return
-      end
       u.result_msg("multiplicação", v[1]*v[2])
       u.result_msg("divisão", v[1]/v[2])
    end,
