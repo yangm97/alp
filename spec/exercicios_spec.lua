@@ -280,4 +280,42 @@ describe("Exercise", function()
          assert.equals(expected, result)
       end)
    end)
+
+   describe("6", function()
+      it("should convert Farenheit to Celsius", function()
+         local input = {
+            100,
+         }
+         local result = test_output_from_t(ex[6], input)
+         -- assert.truthy((result):find("37.78"))
+         assert.truthy((result):find("37.7"))
+      end)
+   end)
+
+   describe("7", function()
+      it("should work with a single salary", function()
+         local input = {
+            1000,
+            "",
+         }
+         local result = test_output_from_t(ex[7], input)
+         -- assert.truthy((result):find("R$120.00"))
+         assert.truthy((result):find("R$120"))
+         -- assert.truthy((result):find("R$1120.00"))
+         assert.truthy((result):find("R$1120"))
+      end)
+      it("should work with multiple salaries", function()
+         local input = {
+            1000,
+            2000,
+            3000,
+            "",
+         }
+         local result = test_output_from_t(ex[7], input)
+         -- assert.truthy((result):find("R$720.00"))
+         assert.truthy((result):find("R$720"))
+         -- assert.truthy((result):find("R$6720.00"))
+         assert.truthy((result):find("R$6720"))
+      end)
+   end)
 end)
