@@ -446,4 +446,23 @@ Digite "sair" para sair.
       assert.truthy((result):find("Deseja executar o exercício 1 novamente?"))
       assert.truthy((result):find("Digite \"sair\" para sair."))
    end)
+   it("should be handle unknown exercises", function()
+      local input = {
+         "0",
+         "n",
+         "sair",
+      }
+      local result = test_output_from_t(u.main, input)
+      assert.truthy((result):find("Exercício não encontrado."))
+   end)
+   it("should display the error message from failed runs", function()
+      local input = {
+         "2",
+         "",
+         "n",
+         "sair",
+      }
+      local result = test_output_from_t(u.main, input)
+      assert.truthy((result):find("É necessário no mínimo dois valores numéricos para se realizar uma soma."))
+   end)
 end)
