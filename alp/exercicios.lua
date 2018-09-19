@@ -1,5 +1,3 @@
-#!/usr/bin/env lua
-
 -- "Constantes" de mentirinha porque lua não tem constantes
 local YEAR_DAYS = 365
 
@@ -309,11 +307,7 @@ Digite "sair" para sair.
    until should_exit
 end
 
-if _G.TEST then
-   return {
-      u = u,
-      ex = ex,
-   }
-end
-
-u.main(arg[1])
+return {
+   u = u,
+   ex = ex,
+}
