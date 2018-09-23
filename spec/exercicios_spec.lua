@@ -1,8 +1,8 @@
 _G.TEST = true
 local unpack = unpack or table.unpack -- luacheck: ignore 143
 local exercicios = require "alp.exercicios"
-local u = exercicios.u
-local ex = exercicios.ex
+local u = exercicios.utilities
+local ex = exercicios.exercises
 
 local function test_whole_output(f, fake_input, ...)
    if fake_input then
