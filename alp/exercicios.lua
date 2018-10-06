@@ -70,34 +70,17 @@ function utilities.read_multiple_num(n)
    if not n then
       io.write("Insira um valor não numérico a qualquer momento para realizar o cálculo.\n")
    end
-   -- local i = 1 -- Lua indexes/arrays start at 1
-   local values = {}
-   -- while true do
-   --    if n and i == n+1 then
-   --       break
-   --    end
-   --    utilities.insert_msg(i)
-   --    local input = utilities.read_num()
-   --    if not input then
-   --       i = i-1 -- See comment above
-   --       break
-   --    end
-   --    values[i] = input
-   --    i = i+1
-   -- end
 
+   local values = {}
    local i = 0
    repeat
-      if n and i == n then
-         break
-      end
       i = i+1
       utilities.insert_msg(i)
       local input = utilities.read_num()
       if input then
          values[i] = input
       end
-   until not input
+   until not input or (n and i == n)
 
    return values, #values
 end
@@ -281,11 +264,11 @@ function utilities.menu(option)
    if text == "todos" then
       for i in ipairs(exercises) do
          utilities.run_ex(i)
+         if i == #exercises then return end
          if not utilities.read_bool_reply("Você deseja continuar executando os exercícios?") then
-            break
+            return
          end
       end
-      return
    end
    if text == "sair" then
       return true
