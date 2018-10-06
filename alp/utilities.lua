@@ -46,10 +46,17 @@ function utilities.read_bool_reply(msg)
 end
 
 function utilities.to_number(v)
-   local type_v = type(v)
-   if type_v == "number" then return v end
-   if type_v ~= "string" then return false end
-   return tonumber(v:match("%d+"))
+   if type(v) == "number" then return v end
+   if type(v) ~= "string" then return false end
+   local res = ""
+   v = v:gsub(",",".")
+   for i = 1, #v do
+      local letter = v:sub(i,i)
+      if letter:byte() > 44 and letter:byte() < 58 then
+         res = res..letter
+      end
+   end
+   return tonumber(res)
 end
 
 function utilities.read_num(msg)

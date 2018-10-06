@@ -11,7 +11,8 @@ describe("Utility", function()
             [28] = "28 ºC",
             [100] = "100%",
             [99] = "abc 99 ",
-            -- [50.12] = "R$ 50.12",
+            [50.12] = "R$ 50,12",
+            [-200] = " -200 ",
          }
          for k,v in pairs(str) do
             assert.equals(k, u.to_number(v))
