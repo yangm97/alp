@@ -1,3 +1,5 @@
+local unpack = unpack or table.unpack -- luacheck: ignore 143
+
 local test = {}
 
 function test.whole_output(f, fake_input, ...)
