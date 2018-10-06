@@ -1,5 +1,9 @@
 local utilities = require "alp.utilities"
 
+local INSS_TAX = utilities.percent_to_decimal(8)
+local KILLOWATT_PRICE = 0.12
+local ICMS_TAX = utilities.percent_to_decimal(18)
+
 local exercises = {
 	[1] = function()
 		io.write(10+5)
@@ -27,7 +31,23 @@ local exercises = {
 	[6] = function()
 		local h = assert(utilities.read_num("Insira a quantidade em horas:"))
 		local m = h * 60
-		io.write("A quantidade em minutos é "..m)
+		io.write("A quantidade em minutos é: "..m.."\n")
+	end,
+	[7] = function()
+		local km = assert(utilities.read_num("Insira a quantidade em horas:"))
+		local m = km * 1000
+		io.write("A quantidade em metros é: "..m.."\n")
+	end,
+	[8] = function()
+		local salary = assert(utilities.read_num("Insira o salário mensal em reais:"))
+		local bonus = assert(utilities.read_num("Insira o valor das horas extras em reais:"))
+		local res = (salary+bonus)*(1-INSS_TAX)
+		io.write("O salário líquido é: R$"..res.."\n")
+	end,
+	[9] = function()
+		local kw = assert(utilities.read_num("Insira o consumo em kW:"))
+		local cost = (kw*KILLOWATT_PRICE)*(1+ICMS_TAX)
+		io.write("O valor a ser pago é: R$"..cost.."\n")
 	end,
 } utilities.set_default(exercises, function()
    io.write("Exercício não encontrado.\n")

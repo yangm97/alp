@@ -66,13 +66,13 @@ describe("Exercise", function()
       end)
    end)
    describe("8", function()
-      it("should calculate salaries", function()
+      it("should calculate salary minus INSS tax", function()
          local input = {
             "R$ 900",
             "R$ 200",
          }
          local result = test.output_from_t(ex[8], input)
-         assert.truthy((result):find("1084"))
+         assert.truthy((result):find("1012"))
       end)
    end)
    describe("9", function()
