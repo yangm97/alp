@@ -84,4 +84,14 @@ describe("Exercise", function()
          assert.truthy((result):find("5.94"))
       end)
    end)
+   describe("10", function()
+      it("should calculate average gas consumption", function()
+         local input = {
+            "142km",
+            "10l"
+         }
+         local result = test.output_from_t(ex[10], input)
+         assert.truthy((result):find("14.2"))
+      end)
+   end)
 end)

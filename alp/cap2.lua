@@ -49,6 +49,12 @@ local exercises = {
 		local cost = (kw*KILLOWATT_PRICE)*(1+ICMS_TAX)
 		io.write("O valor a ser pago é: R$"..cost.."\n")
 	end,
+	[10] = function()
+		local km = assert(utilities.read_num("Insira a distância em kilômetros:"))
+		local gas = assert(utilities.read_num("Insira o consumo de combustível em litros:"))
+		local res = km/gas
+		io.write("O consumo médio é de: "..res.."km/l\n")
+	end,
 } utilities.set_default(exercises, function()
    io.write("Exercício não encontrado.\n")
 end)
