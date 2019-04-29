@@ -6,7 +6,7 @@ local ICMS_TAX = utilities.percent_to_decimal(18)
 
 local exercises = {
    [1] = function()
-      io.write(10+5)
+      io.write((10+5).."\n")
    end,
    [2] = function()
       io.write("Fatec\n")
@@ -24,7 +24,6 @@ local exercises = {
       local salary = assert(utilities.read_num("Insira o salário atual (R$):"))
       local rise_p = utilities.percent_to_decimal(assert(utilities.read_num("Insira o aumento (%):")))
       local rise = salary * rise_p
-
       io.write("O novo salário é: R$"..(salary+rise))
       io.write("O aumento foi de: R$"..rise)
    end,
